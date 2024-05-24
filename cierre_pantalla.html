@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de pantalla</title>
+</head>
+<body>
+    <h1>Este es un ejemplo de cierre de pantalla</h1>
+
+   <script>
+
+window.addEventListener('beforeunload', function(e) {
+  // Prevenir la acción por defecto de cierre de la ventana
+  e.preventDefault();
+
+  // Crear un cuadro de diálogo de encuesta
+  var dialog = document.createElement('div');
+  dialog.id = 'encuestaCierre';
+  dialog.innerHTML = `
+    <h2>¿saber tu opinión.</p>
+    <form id="formularioEncuestQué te pareció la información de esta página?</h2>
+    <p>Antes de salir, nos gustaría a">
+      <input type="radio" name="calificacion" value="1" id="opcion1">
+      <label for="opcion1">Muy mala</label><br>
+      <input type="radio" name="calificacion" value="2" id="opcion2">
+      <label for="opcion2">Mala</label><br>
+      <input type="radio" name="calificacion" value="3" id="opcion3">
+      <label for="opcion3">Neutral</label><br>
+      <input type="radio" name="calificacion" value="4" id="opcion4">
+      <label for="opcion4">Buena</label><br>
+      <input type="radio" name="calificacion" value="5" id="opcion5">
+      <label for="opcion5">Muy buena</label><br>
+      <br>
+      <button type="submit">Enviar calificación</button>
+    </form>
+  `;
+  document.body.appendChild(dialog);
+
+  // Mostrar el cuadro de diálogo
+  dialog.style.display = 'block';
+  dialog.style.position = 'fixed';
+  dialog.style.top = 0;
+  dialog.style.left = 0;
+  dialog.style.width = '100%';
+  dialog.style.height = '100%';
+  dialog.style.background = 'rgba(0, 0, 0, 0.5)';
+  dialog.style.textAlign = 'center';
+  dialog.style.padding = '20px';
+  dialog.style.zIndex = 10000;
+
+  // Manejar el envío del formulario
+  var formulario = document.getElementById('formularioEncuesta');
+  formulario.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Obtener la calificación seleccionada
+    var valorCalificacion = document.querySelector('input[name="calificacion"]:checked').value;
+
+    // Enviar la calificación al servidor (reemplazar con su lógica de envío)
+    console.log('Calificación enviada: ' + valorCalificacion);
+
+    // Cerrar el cuadro de diálogo y permitir que la ventana se cierre
+    dialog.style.display = 'none';
+    e.returnValue = true;
+});
+return "Esta es un msj especial";
+
+});
+
+
+
+   </script>
+
+</body>
+</html>
